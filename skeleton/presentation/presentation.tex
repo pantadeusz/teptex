@@ -1,0 +1,68 @@
+\documentclass{beamer}
+
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
+\usepackage{beamerthemeshadow}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{shortcuts}
+
+\beamertemplateballitem
+\beamertemplatenumberedballsectiontoc
+
+\hypersetup{%
+  pdftitle={Tutul Prezentacji},%
+  pdfauthor={Imie Nazwisko}%
+}
+
+\title[Tytuł]{Tytuł}
+
+\author{Imie Nazwisko}
+
+\institute{Zakład pracy}
+\date{data}
+
+\begin{document}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Spis treści}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\frame{\titlepage}
+
+\section{Sekcja}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+	\frametitle{Tutuł ramki}
+	\BB{Blok}
+	\begin{itemize}
+	\item Pierwszy Item
+	\end{itemize}
+	\BI
+	\I item jakistam
+	\EI
+	\EB
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+	\frametitle{Przykłady funkcji}
+	\begin{block}{W kilku językach programowania}
+	\begin{verbatim}
+double f(double x, double y) {
+     return x + y;
+}
+	\end{verbatim}
+	%\IMG{3cm}{obrazek.png}
+	\end{block}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,97 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\RequirePackage{tikz}
+\usetikzlibrary{shapes,snakes}
+
+% Pakiet ten definiuje fajne ramki
+% \coolframeL{Tytul}{Tresc}
+% \coolframeR{Tytul}{Tresc}
+%
+
+\definecolor{light-gray}{gray}{0.97}
+\definecolor{dimmed}{gray}{0.25}
+\definecolor{gray}{gray}{0.5}
+\tikzstyle{roundbox} = [draw=gray, fill=white!20, very thick,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
+\tikzstyle{roundboxDef} = [draw=gray, fill=white!20, very thick,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
+\tikzstyle{fancytitle} =[fill=gray, text=white, rounded corners]
+
+\newcommand{\coolframeR}[2]{%
+\begin{figure}[h]%
+\noindent%\finctiNoPrint{#1}%
+\begin{tikzpicture}%
+\node [roundbox, anchor=north] (box){%
+    \begin{minipage}{0.96\textwidth}%
+    #2%
+    \end{minipage}%
+};%
+\node[fancytitle,yshift=4pt, xshift=0.48\textwidth, anchor=east]  {\tt \detokenize{#1}};%
+%\node[fancytitle, left=20pt, anchor=east, above=-1mm] at (box.north east)  {\tt \detokenize{#1}};%
+\end{tikzpicture}%
+\end{figure}%
+}
+\newcommand{\coolframeL}[2]{%
+\begin{figure}[h]%
+\noindent%
+\begin{tikzpicture}%
+\node [roundboxDef, anchor=north] (box){%
+    \begin{minipage}{0.96\textwidth}%
+    #2%
+    \end{minipage}%
+};%
+%pos=0.55,yshift=5pt
+%\node[fancytitle, left=20pt, anchor=west, above=-1mm] at (box.north west)  {\tt \detokenize{#1}};%
+\node[fancytitle,yshift=4pt, xshift=-0.48\textwidth, anchor=west] {#1};%
+\end{tikzpicture}%
+\end{figure}%
+}
+
+
+\newcommand{\coolR}[2]{%
+\begin{figure}[h]%
+\noindent%\finctiNoPrint{#1}%
+\begin{tikzpicture}%
+\node [roundbox, anchor=north] (box){%
+    \begin{minipage}{0.96\textwidth}%
+    #2%
+    \end{minipage}%
+};%
+\node[fancytitle,yshift=4pt, xshift=0.48\textwidth, anchor=east]  {\tt #1};%
+%\node[fancytitle, left=20pt, anchor=east, above=-1mm] at (box.north east)  {\tt \detokenize{#1}};%
+\end{tikzpicture}%
+\end{figure}%
+}
+\newcommand{\coolL}[2]{%
+\begin{figure}[h]%
+\noindent%
+\begin{tikzpicture}%
+\node [roundboxDef, anchor=north] (box){%
+    \begin{minipage}{0.96\textwidth}%
+    #2%
+    \end{minipage}%
+};%
+%pos=0.55,yshift=5pt
+%\node[fancytitle, left=20pt, anchor=west, above=-1mm] at (box.north west)  {\tt \detokenize{#1}};%
+\node[fancytitle,yshift=4pt, xshift=-0.48\textwidth, anchor=west] {#1};%
+\end{tikzpicture}%
+\end{figure}%
+}
+
+\newcommand{\coolI}[3]{%
+\begin{figure}[h]%
+\noindent%
+\begin{tikzpicture}%
+\node [roundboxDef, anchor=north] (box){%
+    \begin{minipage}{0.795\textwidth}%
+    #2%
+    \end{minipage}%
+};%
+%pos=0.55,yshift=5pt
+%\node[fancytitle, left=20pt, anchor=west, above=-1mm] at (box.north west)  {\tt \detokenize{#1}};%
+\node[fancytitle,yshift=4pt, xshift=-0.398\textwidth, anchor=west] {#1};%
+\node[roundboxDef,yshift=1pt, xshift=0.585\textwidth, anchor=east] {
+\includegraphics[width=0.145\textwidth]{#3}
+};%
+\end{tikzpicture}%
+\end{figure}%
+}

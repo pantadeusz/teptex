@@ -1,0 +1,27 @@
+\documentclass[10pt]{paper}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}  % utf8-encoded source
+\usepackage{graphicx}        % graphics inside document, pdflatex supports PNG
+\usepackage{amsmath}         % better mathematics
+\usepackage{multirow}        % multi row lines in tables now possible
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{placeins}
+\usepackage[bitstream-charter]{mathdesign} % outstanding font, BEST
+\usepackage{coolframes}
+\renewcommand*\ttdefault{txtt}
+
+\begin{document}
+
+\section{my section}
+
+\coolframeL{Cytat}
+{To jest cytat\cite{Puz2011a} umieszczony w ramce}
+
+\bibliographystyle{abbrv}
+\bibliography{bibliografia}{}
+
+
+\end{document}
+

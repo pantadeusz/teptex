@@ -1,0 +1,49 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+
+% Pakiet ten definiuje fajne ramki
+% \BF{} - begin frame {nazwa ramki}
+% \EF   - end frame
+% \BI   - begin itemize
+% \EI   - end itemize
+% \I    - item
+%
+
+\newcommand{\BI}[0]{%
+\begin{itemize}%
+}
+
+\newcommand{\I}[0]{%
+\item%
+}
+
+\newcommand{\EI}[0]{%
+\end{itemize}%
+}
+
+
+\newcommand{\BB}[1]{%
+\begin{block}{#1}%
+}
+
+
+\newcommand{\EB}[0]{%
+\end{block}%
+}
+
+
+\newcommand{\IMG}[2]{%
+\begin{figure}\resizebox{#1}{!}{%
+\includegraphics{img/#2}%
+}\end{figure}%
+}
+
+\newcommand{\IMGF}[4]{%
+\begin{figure}
+\caption{#3.}
+\label{#4}
+\resizebox{#1}{!}{%
+\includegraphics{img/#2}%
+}\end{figure}%
+}
+
+% #2

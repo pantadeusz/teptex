@@ -1,0 +1,93 @@
+#!/bin/bash
+
+SERVERNAME="hg.puzniakowski.pl"
+PREVPWD=`pwd`
+
+if [ "$1" = "" ]
+then
+    echo "Prosze podac nazwe dokumentu tex"
+    echo "Skladnia:"
+    echo "  ./pdfdepfind filename.tex [clean|update]"
+    echo "gdzie opcja clean powoduje skasowanie sciagnietych zaleznosci"
+    echo "      opcja update powoduje zaktualizowanie sciagnietych zaleznosci"
+    exit 1
+fi
+
+
+INI=pdfdepfind.conf
+INILOCATION=http://public:public@$SERVERNAME/latex/raw-file/tip/scripts/pdfdepfind.ini
+
+DOWNLOADCONF="false"
+if [ ! -f ${INI} ]; then
+	DOWNLOADCONF="true"
+fi
+if [ "$2" = "update" ]; then
+	DOWNLOADCONF="true"
+fi
+
+if [ "$DOWNLOADCONF" = "true" ]; then
+	echo -n "Updating $INI ... "
+	rm -f "$INI"
+	cd /tmp
+	mkdir -p pdfdepend.$USER
+	cd pdfdepend.$USER
+	rm -f $(basename $INILOCATION)
+	wget --quiet -N $INILOCATION
+	if [ "$?" != "0" ]; then
+		echo "ERROR"
+		exit 2
+	fi
+	mv $(basename $INILOCATION) "$PREVPWD/$INI"
+	cd ..
+	cd "$PREVPWD"
+	echo "OK"
+fi
+
+for i in $(seq 1 `cat $INI | grep -v "#" | grep "=" | wc -l`)
+do
+    DEPENDENCY=$(cat $INI | grep -v "#" | grep "=" | head --lines=$i | tail --lines=1)
+    DEPNAME[$i]=$(echo $DEPENDENCY| awk -F= '{print $1}')
+    DEPVALUE[$i]=$(echo $DEPENDENCY| awk -F= '{print $2}')
+    DEPFILE[$i]=$(basename ${DEPVALUE[$i]})
+done
+
+#echo ${!array[*]} # find all the indexes
+# wyczesany skrypt awk - wybiera to co jest w klamerkach {tresc}
+TOCHECK=$(awk 'gsub(/.*[^\}]\{|\}.*/,"") && !_[$0]++' $1)
+#echo $TOCHECK
+DEPSGET=""
+# print all indexes and associated values
+for I in ${!DEPNAME[*]}; do
+  if [ "$(echo $TOCHECK | grep ${DEPNAME[$I]})" != "" ]
+  then
+#	echo "zalezy od ${DEPNAME[$I]}"
+	DEPSGET="$DEPSGET $I"
+  fi
+done
+
+
+
+if [ "$2" = "clean" ]; then
+	for I in $DEPSGET; do
+		rm -f ${DEPFILE[$I]}
+	done
+	rm -f ${INI}
+else
+	if [ "$2" = "update" ]; then
+	for I in $DEPSGET; do
+		rm -f ${DEPFILE[$I]}
+	done
+	fi
+	for I in $DEPSGET; do
+		if [ ! -f ${DEPFILE[$I]} ]; then
+			echo -n downloading ${DEPVALUE[$I]} ".... "
+			wget --quiet -N ${DEPVALUE[$I]}
+			if [ "$?" = "0" ]; then
+			echo OK
+			else
+			echo FAIL
+			fi
+		fi
+	done
+
+fi
