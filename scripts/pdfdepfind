@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVERNAME="hg.puzniakowski.pl"
+SERVERNAME="raw.githubusercontent.com"
 PREVPWD=`pwd`
 
 if [ "$1" = "" ]
@@ -15,7 +15,7 @@ fi
 
 
 INI=pdfdepfind.conf
-INILOCATION=http://public:public@$SERVERNAME/latex/raw-file/tip/scripts/pdfdepfind.ini
+INILOCATION=http://public:public@$SERVERNAME/pantadeusz/teptex/master/scripts/pdfdepfind.ini
 
 DOWNLOADCONF="false"
 if [ ! -f ${INI} ]; then
